@@ -223,10 +223,7 @@ $(document).ready(function () {
             'FROM '+tableurl;
 		  //var query = "SELECT  'ZCTA','Corresponding Counties','Poverty < 18','Poverty < 5','Teen Births','Substance Abuse','CAN Fatalities','Substantiated < 18','Substantiated < 6','Mean of Rankings (all)' ,'Rank Order of Means (Overall Risk Ranking)'" +
             //'FROM 1-saIAOXhsY3Sc6WPvYL5SsJ_U0S94OerpG-Wt6tq';
-	 var team = document.getElementById('team').value;
-        if (team) {
-          query += " WHERE 'Corresponding Counties' CONTAINS IGNORING CASE '" + team + "'";
-        }
+	
         var queryText = encodeURIComponent(query);
         var gvizQuery = new google.visualization.Query(
             'https://www.google.com/fusiontables/gvizdata?tq='  + queryText);
