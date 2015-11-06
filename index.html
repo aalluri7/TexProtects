@@ -25,6 +25,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>	
 <script>
     $(document).ready(function () {
+		
+		$(".hide").hide();
+		$("#moreinfo1").show();
+		
+		
         $('#search-string_0').keypress(function (e) {
             if (e.which == 13) {
                 changeMap_0();
@@ -42,6 +47,32 @@
     });
 </script>
 <style>
+	.hide{
+		padding-bottom:15px;
+	}
+	.chartitle{
+		font-weight: bold;
+		font-size: 16px;
+		text-align: center;
+	}
+	
+	table {
+            border-collapse: collapse;
+            border: 2px black solid;
+            font: 12px sans-serif;
+			width: 100%;
+			background-color: white;
+        }
+        th {
+            border: 1px black solid;
+            padding: 5px;
+			width: 100%;
+        }
+        td {
+            border: 1px black solid;
+            padding: 5px;
+			width: 100px;
+        }
 	
 	.pleasedontfloat { 
     clear:both;
@@ -137,6 +168,7 @@
             margin: 10px;
             padding: 5px;
             width: 150px;
+					float:right;
         }
         
         #legend p {
@@ -171,34 +203,48 @@
 			 'Substantiated Child Abuse Ranking < 18',	'Substantiated Child Abuse Ranking < 6'];
 		var ranges =[{'min': 4,'max': 1935},{'min': 0,'max': 1834},{'min': 0,'max': 1756},{'min': 0,'max': 1602.5},{'min': 0,'max': 1911},{'min': 0,'max': 1839},{'min': 0,'max': 1884},{'min': 0,'max': 1865}];
 		var colorgradiant =
-												['#F72A08',
-												'#F63E10',
-												'#F65218',
-												'#F66620',
-												'#F67B29',
-												'#F68F31',
-												'#F5A339',
-												'#F5B842',
-												'#F5CC4A',
-												'#F5E052',
-												'#F5F55B'];
+											[
+												'#a50026',
+												'#d73027',
+												'#f46d43',
+												'#fdae61',
+												'#fee08b',
+												'#d9ef8b',
+												'#a6d96a',
+												'#66bd63',
+												'#1a9850',
+												'#006837'
+											];
+colorgradiant.reverse();
+
+
+
+
+
+
+
+
+
+
 var colors = ['#ffffb2',
 '#fed976',
 '#feb24c',
 '#fd8d3c',
 '#f03b20',
 '#bd0026']
-			
+			var n = colorgradiant.length+1;
 			var COLUMN_STYLES = {};
 for (i = 0; i < rankings.length; i++) 
 { 
    COLUMN_STYLES[rankings[i]] = [];
-    for (j = 6; j > 0; j--)
-    COLUMN_STYLES[rankings[i]].push({'max':Math.floor(ranges[i].max/6*j),'min':Math.floor(ranges[i].max/6*(j-1)),'color':colors[j-1]
+    for (j = 0; j < n-1; j++)
+    COLUMN_STYLES[rankings[i]].push({'min':Math.floor(ranges[i].max/n*(j)),'max':Math.floor(ranges[i].max/n*(j+1)),'color':colorgradiant[j]
     });
 }
-
 			
+			console.log(COLUMN_STYLES );
+
+		//COLUMN_STYLES =	{"Final Risk Ranking":[{"min":1759,"max":1935,"color":"#a50026"},{"min":1583,"max":1759,"color":"#d73027"},{"min":1407,"max":1583,"color":"#f46d43"},{"min":1231,"max":1407,"color":"#fdae61"},{"min":1055,"max":1231,"color":"#fee08b"},{"min":879,"max":1055,"color":"#d9ef8b"},{"min":703,"max":879,"color":"#a6d96a"},{"min":527,"max":703,"color":"#66bd63"},{"min":351,"max":527,"color":"#1a9850"},{"min":175,"max":351,"color":"#006837"}],"Poverty Ranking for Children < 18":[{"min":1667,"max":1834,"color":"#a50026"},{"min":1500,"max":1667,"color":"#d73027"},{"min":1333,"max":1500,"color":"#f46d43"},{"min":1167,"max":1333,"color":"#fdae61"},{"min":1000,"max":1167,"color":"#fee08b"},{"min":833,"max":1000,"color":"#d9ef8b"},{"min":666,"max":833,"color":"#a6d96a"},{"min":500,"max":666,"color":"#66bd63"},{"min":333,"max":500,"color":"#1a9850"},{"min":166,"max":333,"color":"#006837"}],"Poverty Ranking for Children < 5":[{"min":1596,"max":1756,"color":"#a50026"},{"min":1436,"max":1596,"color":"#d73027"},{"min":1277,"max":1436,"color":"#f46d43"},{"min":1117,"max":1277,"color":"#fdae61"},{"min":957,"max":1117,"color":"#fee08b"},{"min":798,"max":957,"color":"#d9ef8b"},{"min":638,"max":798,"color":"#a6d96a"},{"min":478,"max":638,"color":"#66bd63"},{"min":319,"max":478,"color":"#1a9850"},{"min":159,"max":319,"color":"#006837"}],"Teen Birth Ranking (15-19yrs)":[{"min":1456,"max":1602,"color":"#a50026"},{"min":1311,"max":1456,"color":"#d73027"},{"min":1165,"max":1311,"color":"#f46d43"},{"min":1019,"max":1165,"color":"#fdae61"},{"min":874,"max":1019,"color":"#fee08b"},{"min":728,"max":874,"color":"#d9ef8b"},{"min":582,"max":728,"color":"#a6d96a"},{"min":437,"max":582,"color":"#66bd63"},{"min":291,"max":437,"color":"#1a9850"},{"min":145,"max":291,"color":"#006837"}],"Substance Abuse Ranking":[{"min":1737,"max":1911,"color":"#a50026"},{"min":1563,"max":1737,"color":"#d73027"},{"min":1389,"max":1563,"color":"#f46d43"},{"min":1216,"max":1389,"color":"#fdae61"},{"min":1042,"max":1216,"color":"#fee08b"},{"min":868,"max":1042,"color":"#d9ef8b"},{"min":694,"max":868,"color":"#a6d96a"},{"min":521,"max":694,"color":"#66bd63"},{"min":347,"max":521,"color":"#1a9850"},{"min":173,"max":347,"color":"#006837"}],"Child Abuse and Neglect Related Fatalities Ranking":[{"min":1671,"max":1839,"color":"#a50026"},{"min":1504,"max":1671,"color":"#d73027"},{"min":1337,"max":1504,"color":"#f46d43"},{"min":1170,"max":1337,"color":"#fdae61"},{"min":1003,"max":1170,"color":"#fee08b"},{"min":835,"max":1003,"color":"#d9ef8b"},{"min":668,"max":835,"color":"#a6d96a"},{"min":501,"max":668,"color":"#66bd63"},{"min":334,"max":501,"color":"#1a9850"},{"min":167,"max":334,"color":"#006837"}],"Substantiated Child Abuse Ranking < 18":[{"min":1712,"max":1884,"color":"#a50026"},{"min":1541,"max":1712,"color":"#d73027"},{"min":1370,"max":1541,"color":"#f46d43"},{"min":1198,"max":1370,"color":"#fdae61"},{"min":1027,"max":1198,"color":"#fee08b"},{"min":856,"max":1027,"color":"#d9ef8b"},{"min":685,"max":856,"color":"#a6d96a"},{"min":513,"max":685,"color":"#66bd63"},{"min":342,"max":513,"color":"#1a9850"},{"min":171,"max":342,"color":"#006837"}],"Substantiated Child Abuse Ranking < 6":[{"min":1695,"max":1864,"color":"#a50026"},{"min":1525,"max":1695,"color":"#d73027"},{"min":1356,"max":1525,"color":"#f46d43"},{"min":1186,"max":1356,"color":"#fdae61"},{"min":1017,"max":1186,"color":"#fee08b"},{"min":847,"max":1017,"color":"#d9ef8b"},{"min":678,"max":847,"color":"#a6d96a"},{"min":508,"max":678,"color":"#66bd63"},{"min":339,"max":508,"color":"#1a9850"},{"min":169,"max":339,"color":"#006837"}]};
 			
       /* var COLUMN_STYLES = {
             'Final Risk Ranking': [{
@@ -339,9 +385,12 @@ for (i = 0; i < rankings.length; i++)
                     updateLegend(selectedColumn);
                 });
             google.maps.event.addListener(layer, "click", function (e) {
-                document.getElementById("charttitle").innerHTML = e.row['ZCTA'].value +"Final Risk Ranking :"+ e.row['Final Risk Ranking'].value;
+				
+				
+				 document.getElementById("chartzip").innerHTML = '' + e.row['ZCTA'].value;
+                document.getElementById("charttitle").innerHTML = " Risk factors for Final Risk Ranking :  "+ e.row['Final Risk Ranking'].value;
 							
-				this.setOptions({fillOpacity: 1});
+				this.setOptions({fillColor: 'green'});
 				
 							
 							myRadarChart.datasets[0].points[0].value = e.row['Poverty Ranking for Children < 18'].value;
@@ -357,6 +406,236 @@ for (i = 0; i < rankings.length; i++)
 // Would update the first dataset's value of 'Sleeping' to be 50
 myRadarChart.update();
 // Calling update now animates the position of Sleeping from 90 to 50.
+				
+				
+				
+	var myTableDiv = document.getElementById("moreinfo1");
+				$( "#moreinfo1" ).empty();
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+    
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Total Substantiated Child Abuse Cases (5 and Under)"));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Rate of Substantiated Child Abuse Cases (5 and Under)"));
+            tr.appendChild(td);
+				
+		var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Total Substantiated Child Abuse Cases (5 and Under)'].value));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Rate of Substantiated Child Abuse Cases (5 and Under)'].value));
+            tr.appendChild(td);
+		myTableDiv.appendChild(table);
+				
+		var myTableDiv = document.getElementById("moreinfo2");
+				$( "#moreinfo2" ).empty();
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+    
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Total Substantiated Child Abuse Cases (Under age 18)"));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Rate of Substantiated Child Abuse Cases (Under age 18)"));
+            tr.appendChild(td);
+				
+		var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Total Substantiated Child Abuse Cases (Under age 18)'].value));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Rate of Substantiated Child Abuse Cases (Under age 18)'].value));
+            tr.appendChild(td);
+		myTableDiv.appendChild(table);		
+				
+
+				
+		var myTableDiv = document.getElementById("moreinfo3");
+				$( "#moreinfo3" ).empty();
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+    
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Child Abuse and Neglect Related Fatalities (2010-2014)"));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Rate of Child Abuse and Neglect Related Fatalities (Under 18)"));
+            tr.appendChild(td);
+				
+		var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Child Abuse and Neglect Related Fatalities (2010-2014)'].value));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Rate of Child Abuse and Neglect Related Fatalities (Under 18)'].value));
+            tr.appendChild(td);
+		myTableDiv.appendChild(table);	
+				
+		var myTableDiv = document.getElementById("moreinfo4");
+				$( "#moreinfo4" ).empty();
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+    
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Drug- Related Offenses"));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Rate of Substane Abuse Treatments"));
+            tr.appendChild(td);
+				
+		var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Drug- Related Offenses'].value));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Rate of Substane Abuse Treatments'].value));
+            tr.appendChild(td);
+		myTableDiv.appendChild(table);	
+				
+var myTableDiv = document.getElementById("moreinfo5");
+				$( "#moreinfo5" ).empty();
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+    
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Number of Teen Births (15-19yrs)"));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Rate of Teen Birth(15-19yrs)"));
+            tr.appendChild(td);
+				
+		var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Number of Teen Births (15-19yrs)'].value));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Rate of Teen Birth(15-19yrs)'].value));
+            tr.appendChild(td);
+		myTableDiv.appendChild(table);					
+				
+	var myTableDiv = document.getElementById("moreinfo6");
+				$( "#moreinfo6" ).empty();
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+    
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Total Estimated Children 5 and Under"));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Rate of Child Poverty 5 and Under"));
+            tr.appendChild(td);
+				
+		var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Total Estimated Children 5 and Under'].value));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Rate of Child Poverty 5 and Under'].value));
+            tr.appendChild(td);
+		myTableDiv.appendChild(table);				
+				
+				
+var myTableDiv = document.getElementById("moreinfo7");
+				$( "#moreinfo7" ).empty();
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+    
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Total Children in Poverty Under 18"));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode("Rate of Child Poverty Under 18"));
+            tr.appendChild(td);
+				
+		var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        
+            var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Total Children in Poverty Under 18'].value));
+            tr.appendChild(td);
+				
+			var td = document.createElement('TD');            
+            td.appendChild(document.createTextNode(e.row['Rate of Child Poverty Under 18'].value));
+            tr.appendChild(td);
+		myTableDiv.appendChild(table);					
+				
             });
         }
         var zoomToAddress = function (address) {
@@ -370,19 +649,19 @@ myRadarChart.update();
                         resetmap();
                     } else {
                         map.setCenter(results[0].geometry.location);
-                        map.setZoom(9);
+                        map.setZoom(10);
                     }
 
 
                     // OPTIONAL: run spatial query to find results within bounds.
                     var sw = map.getBounds().getSouthWest();
                     var ne = map.getBounds().getNorthEast();
-                    var where = 'ST_INTERSECTS(' + locationColumn +
+                    var where = 'ST_INTERSECTS(' + 'geometry' +
                         ', RECTANGLE(LATLNG' + sw + ', LATLNG' + ne + '))';
                     layer.setOptions({
                         query: {
-                            select: locationColumn,
-                            from: tableId,
+                            select: geometry,
+                            from: tableurl,
                             where: where
                         }
                     });
@@ -497,6 +776,7 @@ myRadarChart.update();
             legend.appendChild(risktop);
 						
             var columnStyle = COLUMN_STYLES[column];
+					columnStyle.reverse();
             for (var i in columnStyle) {
                 var style = columnStyle[i];
 
@@ -521,8 +801,47 @@ myRadarChart.update();
             legendWrapper.appendChild(legend);
         }
 		function displaytable(data) {
+			$(".hide").hide();
+			var labels= ["Substantiated Child Abuse < 6",
+						 "Substantiated Child Abuse < 18",
+						 "CAN fatalities",
+						 "Substance Abuse",
+						 "Teen Birth(15-19yrs)",
+						 "Poverty Children < 5",
+						 "Poverty Children  < 18"]
+			if(data==labels[0]){
+				$("#subtitle").text("Substantiated 5 and Under (2010-2014)");
+				$("#moreinfo1").show();
+			}
+			else if(data==labels[1]){
+				$("#subtitle").text("Substantiated < 18 (2010-2014)");
+				$("#moreinfo2").show();
+			}
+			else if(data==labels[2]){
+				$("#subtitle").text("Child Abuse and Neglect Related Fatalities (2010-2014)");
+				$("#moreinfo3").show();
+			}
+			else if(data==labels[3]){
+				$("#subtitle").text("Substance Abuse Treatment");
+				$("#moreinfo4").show();
+			}
+			else if(data==labels[4]){
+				$("#subtitle").text("Teen Birth(15-19yrs)");
+				$("#moreinfo5").show();
+			}
+			else if(data==labels[5]){
+				$("#subtitle").text("Children in Poverty < 5");
+				$("#moreinfo6").show();
+			}
+			else if(data==labels[6]){
+				$("#subtitle").text("Children in Poverty < 18");
+				$("#moreinfo7").show();
+			}
 			
 			
+			
+			
+		
 			
 		
 		}
@@ -582,9 +901,36 @@ myRadarChart.update();
 				
             </div>
 				<div id="infoWindowDiv" class="dashitem">
-					<p >Risk Rankings</p>
-					<div id="charttitle"></div>
+					
+					<p id="chartzip" style="font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 22px; font-family: helvetica; color: rgb(78, 75, 75); text-align: center; line-height: 21px; width: 100%; height: 100%; white-space: pre-wrap; padding-top: 0px;">Zipcode </p>
+					<div id="charttitle" class="chartitle" ></div>
 					<canvas id="myChart" width="400" height="400"></canvas>
+					<div id='subtitle' class="chartitle">
+							Substantiated 5 and Under (2010-2014)</div>
+					<div id="moreinfo1" class="hide">
+						
+					</div>
+					
+					
+					<div id="moreinfo2" class="hide">
+						
+					</div>
+					<div id="moreinfo3" class="hide">
+						
+					</div>
+					<div id="moreinfo4" class="hide">
+						
+					</div>
+					<div id="moreinfo5" class="hide">
+						
+					</div>
+					<div id="moreinfo6" class="hide">
+						
+					</div>
+					<div id="moreinfo7" class="hide">
+						
+					</div>
+					
 					<script>
 						Chart.defaults.global.responsive = true;
 					var data = {
@@ -628,28 +974,7 @@ var myRadarChart = new Chart(ctx).Radar(data,{pointLabelFontColor : "#000000"});
 					
             </div>
 							
-							<div  class="dashitem">
-
-						<table>
-							<tr>
-								<th id="1">Month</th>
-								<th id="2">Savings</th>
-								<th id="3">Savings</th>
-							</tr>
-							<tr>
-								<td>January</td>
-								<td>$100</td>
-								<td>$100</td>
-							</tr>
-							<tr>
-								<td>February</td>
-								<td>$80</td>
-								<td>$80</td>
-							</tr>
-						</table>
 							
-							
-							</div>
 			
 			</div>        
 
