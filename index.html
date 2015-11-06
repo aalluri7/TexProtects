@@ -519,7 +519,7 @@ myRadarChart.update();
 
         
             var td = document.createElement('TD');            
-            td.appendChild(document.createTextNode("Drug- Related Offenses"));
+            td.appendChild(document.createTextNode("Number of state funded substance abuse service types utilized within a zip code"));
             tr.appendChild(td);
 				
 			var td = document.createElement('TD');            
@@ -531,7 +531,7 @@ myRadarChart.update();
 
         
             var td = document.createElement('TD');            
-            td.appendChild(document.createTextNode(e.row['Drug- Related Offenses'].value));
+            td.appendChild(document.createTextNode(e.row['Number of state funded substance abuse service types utilized within a zip code'].value));
             tr.appendChild(td);
 				
 			var td = document.createElement('TD');            
@@ -878,6 +878,7 @@ var myTableDiv = document.getElementById("moreinfo7");
                         <div class="widgetText" style="font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 18px; font-family: helvetica; color: rgb(78, 75, 75); text-align: left; line-height: 21px; width: 100%; height: 100%; white-space: pre-wrap; padding-top: 0px;">Zoom to location :</div>
                         <input type="text" id="adrsearch" class="inputtext" style="width: 162.5px;">
                         <input type="button" onclick="zoomto()" value="Go" class="inputtext" class="btn">
+						
                     </div>
                     <div class="inputdiv">
                         <div class="widgetText" style="font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 18px; font-family: helvetica; color: rgb(78, 75, 75); text-align: left; line-height: 21px; width: 100%; height: 100%; white-space: pre-wrap; padding-top: 0px;">Risk Rankings :</div>
@@ -898,6 +899,7 @@ var myTableDiv = document.getElementById("moreinfo7");
 				 <div id="mapbox">
                 <div id="map-canvas" style="height:600px;     width: 98%;
     		"></div>
+					 <input type="button" onclick="resetmap()" value="reset" class="inputtext" class="btn">
 				
             </div>
 				<div id="infoWindowDiv" class="dashitem">
