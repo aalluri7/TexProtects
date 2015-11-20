@@ -189,6 +189,8 @@
         }
     </style>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+	 <script type="text/javascript" src="https://gmaps-utility-gis.googlecode.com/svn/trunk/fusiontips/src/fusiontips.js"></script>
+	
 
     <script type="text/javascript">
         /**
@@ -368,7 +370,18 @@ for (i = 0; i < rankings.length; i++)
 
                 }
             });
+						
+					
             layer.setMap(map);
+					layer.enableMapTips({
+        //a valid key with enabled FusionTables API for the project
+        key: 'AIzaSyABWjPP41E6ZW0_Ay3xaBSqwqhRKwk48-c',
+        select: "ZCTA",
+        from: tableurl,
+        geometryColumn: "geometry",
+        delay: 50,
+        style: {padding:'4px',background:'firebrick',color:'#fff',fontSize:'1.2em'}
+    });
 
             initSelectmenu();
             for (column in COLUMN_STYLES) {
