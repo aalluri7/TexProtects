@@ -19,15 +19,18 @@
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="radarChart.js"></script>	
 
 <script src="Chart.js"></script>	
 <script>
     $(document).ready(function () {
 		
 		$(".hide").hide();
-		$("#moreinfo1").show();
+		$("#moreinfo0").show();
 		
 		
         $('#search-string_0').keypress(function (e) {
@@ -53,6 +56,7 @@
 	.chartitle{
 		font-weight: bold;
 		font-size: 16px;
+		color: black;
 		text-align: center;
 	}
 	
@@ -164,7 +168,7 @@
     <link href="https://developers.google.com/fusiontables/docs/samples/style/default.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         #legend {
-            background-color: #FFF;
+            background-color:rgba(255, 255 ,255, 1);
             margin: 10px;
             padding: 5px;
             width: 150px;
@@ -201,21 +205,19 @@
 			curcounty = "";
 			 tableurl = "1G3q0CX95fnDEjEnp39GxKvt3jHYyQbEkIQGZTPcB";
 			
-		var rankings=	['Overall Risk Ranking','Poverty Ranking for Children < 18yrs',	'Poverty Ranking for Children < 5yrs',	'Teen Births Rating (15-19yrs)',	'Substance Abuse Rating',	'Child Abuse and Neglect Related Fatalities Rating',
+		var rankings=	['Overall Risk Ranking','Poverty Ranking for Children < 18yrs',
+									 'Poverty Ranking for Children < 5yrs',	'Teen Births Rating (15-19yrs)',	
+									 'Substance Abuse Rating',	
+									 'Child Abuse and Neglect Related Fatalities Rating',
 			 'Substantiated Abuse Rating < 18yrs',	'Substantiated Abuse Rating < 5yrs'];
-		 ranges =[{'min': 4,'max': 1935},{'min': 1,'max': 1834},{'min': 1,'max': 1756},{'min': 1,'max': 1602.5},{'min': 1,'max': 1911},{'min': 1,'max': 1839},{'min': 1,'max': 1884},{'min': 1,'max': 1865}];
+		 ranges =[{'min': 0,'max': 1935},{'min': 0,'max': 1834},{'min': 0,'max': 1756},{'min': 0,'max': 1602.5},{'min': 0,'max': 1911},{'min': 0,'max': 1839},{'min': 0,'max': 1884},{'min': 0,'max': 1865}];
 		var colorgradiant =
 											[
-												'#a50026',
-												'#d73027',
-												'#f46d43',
-												'#fdae61',
-												'#fee08b',
-												'#d9ef8b',
-												'#a6d96a',
-												'#66bd63',
-												'#1a9850',
-												'#006837'
+'#d7191c',
+'#fdae61',
+'#ffffbf',
+'#a6d96a',
+'#1a9641'
 											];
 colorgradiant.reverse();
 
@@ -241,11 +243,13 @@ for (i = 0; i < rankings.length; i++)
    COLUMN_STYLES[rankings[i]] = [];
 			COLUMN_STYLES[rankings[i]].push({'min':-50,'max':-.5,'color':'#696969' });
     for (j = 0; j < n-1; j++)
-    COLUMN_STYLES[rankings[i]].push({'min':Math.floor(ranges[i].max/n*(j)),'max':Math.floor(ranges[i].max/n*(j+1)),'color':colorgradiant[j] });
+    COLUMN_STYLES[rankings[i]].push({'min':Math.floor(ranges[i].max/(n-1)*(j)),'max':Math.floor(ranges[i].max/(n-1)*(j+1)),'color':colorgradiant[j] });
 	
 }
 			
 			console.log(COLUMN_STYLES );
+			console.log(JSON.stringify(COLUMN_STYLES) );
+		
 
 		//COLUMN_STYLES =	{"Final Risk Ranking":[{"min":1759,"max":1935,"color":"#a50026"},{"min":1583,"max":1759,"color":"#d73027"},{"min":1407,"max":1583,"color":"#f46d43"},{"min":1231,"max":1407,"color":"#fdae61"},{"min":1055,"max":1231,"color":"#fee08b"},{"min":879,"max":1055,"color":"#d9ef8b"},{"min":703,"max":879,"color":"#a6d96a"},{"min":527,"max":703,"color":"#66bd63"},{"min":351,"max":527,"color":"#1a9850"},{"min":175,"max":351,"color":"#006837"}],"Poverty Ranking for Children < 18":[{"min":1667,"max":1834,"color":"#a50026"},{"min":1500,"max":1667,"color":"#d73027"},{"min":1333,"max":1500,"color":"#f46d43"},{"min":1167,"max":1333,"color":"#fdae61"},{"min":1000,"max":1167,"color":"#fee08b"},{"min":833,"max":1000,"color":"#d9ef8b"},{"min":666,"max":833,"color":"#a6d96a"},{"min":500,"max":666,"color":"#66bd63"},{"min":333,"max":500,"color":"#1a9850"},{"min":166,"max":333,"color":"#006837"}],"Poverty Ranking for Children < 5":[{"min":1596,"max":1756,"color":"#a50026"},{"min":1436,"max":1596,"color":"#d73027"},{"min":1277,"max":1436,"color":"#f46d43"},{"min":1117,"max":1277,"color":"#fdae61"},{"min":957,"max":1117,"color":"#fee08b"},{"min":798,"max":957,"color":"#d9ef8b"},{"min":638,"max":798,"color":"#a6d96a"},{"min":478,"max":638,"color":"#66bd63"},{"min":319,"max":478,"color":"#1a9850"},{"min":159,"max":319,"color":"#006837"}],"Teen Birth Ranking (15-19yrs)":[{"min":1456,"max":1602,"color":"#a50026"},{"min":1311,"max":1456,"color":"#d73027"},{"min":1165,"max":1311,"color":"#f46d43"},{"min":1019,"max":1165,"color":"#fdae61"},{"min":874,"max":1019,"color":"#fee08b"},{"min":728,"max":874,"color":"#d9ef8b"},{"min":582,"max":728,"color":"#a6d96a"},{"min":437,"max":582,"color":"#66bd63"},{"min":291,"max":437,"color":"#1a9850"},{"min":145,"max":291,"color":"#006837"}],"Substance Abuse Ranking":[{"min":1737,"max":1911,"color":"#a50026"},{"min":1563,"max":1737,"color":"#d73027"},{"min":1389,"max":1563,"color":"#f46d43"},{"min":1216,"max":1389,"color":"#fdae61"},{"min":1042,"max":1216,"color":"#fee08b"},{"min":868,"max":1042,"color":"#d9ef8b"},{"min":694,"max":868,"color":"#a6d96a"},{"min":521,"max":694,"color":"#66bd63"},{"min":347,"max":521,"color":"#1a9850"},{"min":173,"max":347,"color":"#006837"}],"Child Abuse and Neglect Related Fatalities Ranking":[{"min":1671,"max":1839,"color":"#a50026"},{"min":1504,"max":1671,"color":"#d73027"},{"min":1337,"max":1504,"color":"#f46d43"},{"min":1170,"max":1337,"color":"#fdae61"},{"min":1003,"max":1170,"color":"#fee08b"},{"min":835,"max":1003,"color":"#d9ef8b"},{"min":668,"max":835,"color":"#a6d96a"},{"min":501,"max":668,"color":"#66bd63"},{"min":334,"max":501,"color":"#1a9850"},{"min":167,"max":334,"color":"#006837"}],"Substantiated Child Abuse Ranking < 18":[{"min":1712,"max":1884,"color":"#a50026"},{"min":1541,"max":1712,"color":"#d73027"},{"min":1370,"max":1541,"color":"#f46d43"},{"min":1198,"max":1370,"color":"#fdae61"},{"min":1027,"max":1198,"color":"#fee08b"},{"min":856,"max":1027,"color":"#d9ef8b"},{"min":685,"max":856,"color":"#a6d96a"},{"min":513,"max":685,"color":"#66bd63"},{"min":342,"max":513,"color":"#1a9850"},{"min":171,"max":342,"color":"#006837"}],"Substantiated Child Abuse Ranking < 6":[{"min":1695,"max":1864,"color":"#a50026"},{"min":1525,"max":1695,"color":"#d73027"},{"min":1356,"max":1525,"color":"#f46d43"},{"min":1186,"max":1356,"color":"#fdae61"},{"min":1017,"max":1186,"color":"#fee08b"},{"min":847,"max":1017,"color":"#d9ef8b"},{"min":678,"max":847,"color":"#a6d96a"},{"min":508,"max":678,"color":"#66bd63"},{"min":339,"max":508,"color":"#1a9850"},{"min":169,"max":339,"color":"#006837"}]};
 			
@@ -360,8 +364,9 @@ for (i = 0; i < rankings.length; i++)
         function initialize() {
             geocoder = new google.maps.Geocoder();
             map = new google.maps.Map(document.getElementById('map-canvas'), {
-                center: new google.maps.LatLng(31.1, -98.5),
+                center: new google.maps.LatLng(31.1, -100),
                 zoom: 6,
+							streetViewControl: false,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
 
@@ -399,16 +404,80 @@ for (i = 0; i < rankings.length; i++)
                     var selectedColumn = this.value;
                     applyStyle(map, layer, selectedColumn);
                     updateLegend(selectedColumn);
+							
+							
+							displaytable(selectedColumn);
+							
+							
+							
                 });
             google.maps.event.addListener(layer, "click", function (e) {
 				
 				
 				 document.getElementById("chartzip").innerHTML = 'Zipcode : ' + e.row['ZCTA'].value;
-                document.getElementById("charttitle").innerHTML = " Overall Risk Ranked :  "+ e.row['Overall Risk Ranking'].value+" out of "+ranges[0].max;
+       //         document.getElementById("charttitle").innerHTML = " Overall Risk Ranked :  "+ e.row['Overall Risk Ranking'].value+" out of "+ranges[0].max;
 							
 				this.setOptions({fillColor: 'green'});
 				
-							var chartvar = ["Poverty Ranking for Children < 18yrs",
+							
+								////////////////////////////////////////////////////////////// 
+			//////////////////////// Set-Up ////////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var margin = {top: 60, right: 60, bottom: 100, left: 60},
+				width = 250,
+				height = 250;
+					
+			////////////////////////////////////////////////////////////// 
+			////////////////////////// Data ////////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+				var chartvar = ["Poverty Ranking for Children < 18yrs",
+						 "Poverty Ranking for Children < 5yrs",
+						 "Teen Births Rating (15-19yrs)",
+						 "Substantiated Abuse Rating < 18yrs", 
+						 "Substantiated Abuse Rating < 5yrs",
+						 "Substance Abuse Rating",
+						 "Child Abuse and Neglect Related Fatalities Rating"];
+		/*	var data = [];
+			for(var i in chartvar)
+				{
+					data.push(	{axis:i,value:100})
+				}*/
+			var info =  [368, 440, 425.5, 455, 651.5, 454, 639] ;
+			var data = [
+					  [//iPhone
+						{axis:chartvar[0],value:e.row[chartvar[0]].value},
+						{axis:chartvar[1],value:e.row[chartvar[1]].value},
+						{axis:chartvar[2],value:e.row[chartvar[2]].value},
+						{axis:chartvar[3],value:e.row[chartvar[3]].value},
+						{axis:chartvar[4],value:e.row[chartvar[4]].value},
+						{axis:chartvar[5],value:e.row[chartvar[5]].value},
+						{axis:chartvar[6],value:e.row[chartvar[6]].value}
+					//	{axis:"To Be A Smartphone",value:0.50}			
+					  ]
+					];
+			////////////////////////////////////////////////////////////// 
+			//////////////////// Draw the Chart ////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var color = d3.scale.ordinal()
+				.range(["#EDC951","#CC333F","#00A0B0"]);
+				
+			var radarChartOptions = {
+			  w: width,
+			  h: height,
+			  margin: margin,
+			  maxValue: 1900,
+			  levels: 4,
+			  roundStrokes: true,
+			  color: color
+			};
+			//Call function to draw the Radar chart
+			RadarChart(".radarChart", data, radarChartOptions);
+				
+							
+							/*		var chartvar = ["Poverty Ranking for Children < 18yrs",
 						 "Poverty Ranking for Children < 5yrs",
 						 "Teen Births Rating (15-19yrs)",
 						 "Substantiated Abuse Rating < 18yrs", 
@@ -423,17 +492,24 @@ for (i = 0; i < rankings.length; i++)
 							myRadarChart.datasets[0].points[4].value = e.row[chartvar[4]].value;
 							myRadarChart.datasets[0].points[5].value = e.row[chartvar[5]].value;
 							myRadarChart.datasets[0].points[6].value = e.row[chartvar[6]].value;
-							
+							*/
 							
 							
 // Would update the first dataset's value of 'Sleeping' to be 50
-myRadarChart.update();
+//myRadarChart.update();
 // Calling update now animates the position of Sleeping from 90 to 50.
 				
 		//		['Overall Risk Ranking','Poverty Ranking for Children < 18yrs',	'Poverty Ranking for Children < 5yrs',	'Teen Births Rating (15-19yrs)',	'Substance Abuse Rating',	'Child Abuse and Neglect Related Fatalities Rating',
 			// 'Substantiated Abuse Rating < 18yrs',	'Substantiated Abuse Rating < 5yrs'];
 				
-	var myTableDiv = document.getElementById("moreinfo1");
+	var myTableDiv = document.getElementById("moreinfo0");
+				$( "#moreinfo0" ).empty();
+							var subtitle = document.createElement('div');
+							subtitle.className = "chartitle";
+							subtitle.innerHTML= 'Overall Risk Ranking'+": "+e.row['Overall Risk Ranking'].value+" out of "+ ranges[0].max;
+								myTableDiv.appendChild(subtitle);
+    
+							var myTableDiv = document.getElementById("moreinfo1");
 				$( "#moreinfo1" ).empty();
 							var subtitle = document.createElement('div');
 							subtitle.className = "chartitle";
@@ -692,7 +768,7 @@ var myTableDiv = document.getElementById("moreinfo7");
 				
             });
         }
-        var zoomToAddress = function (address) {
+        var zoomToAddress = function (address,zoomlevel) {
 
             geocoder.geocode({
                 address: address
@@ -703,22 +779,11 @@ var myTableDiv = document.getElementById("moreinfo7");
                         resetmap();
                     } else {
                         map.setCenter(results[0].geometry.location);
-                        map.setZoom(10);
+                        map.setZoom(zoomlevel);
                     }
 
 
-                    // OPTIONAL: run spatial query to find results within bounds.
-                    var sw = map.getBounds().getSouthWest();
-                    var ne = map.getBounds().getNorthEast();
-                    var where = 'ST_INTERSECTS(' + 'geometry' +
-                        ', RECTANGLE(LATLNG' + sw + ', LATLNG' + ne + '))';
-                    layer.setOptions({
-                        query: {
-                            select: geometry,
-                            from: tableurl,
-                            where: where
-                        }
-                    });
+                   
                 } else {
                     window.alert('Address could not be geocoded: ' + status);
                 }
@@ -738,48 +803,45 @@ var myTableDiv = document.getElementById("moreinfo7");
         }
 
         // Apply the style to the layer & generate corresponding legend
-        function applyStyle(map, layer, column) {
-            var columnStyle = COLUMN_STYLES[column];
-            var styles = [];
+       function applyStyle(map, layer, column) {
+        var columnStyle = COLUMN_STYLES[column];
+        var styles = [];
 
-            for (var i in columnStyle) {
-                var style = columnStyle[i];
-                styles.push({
-                    where: generateWhere(column, style.min, style.max),
-                    polygonOptions: {
-											
-											  
-											  strokeWidth: 15,
-                        fillColor: style.color
-                        //fillOpacity: 0.8
-												
-                    }
-                });
+        for (var i in columnStyle) {
+          var style = columnStyle[i];
+          styles.push({
+            where: generateWhere(column, style.min, style.max),
+            polygonOptions: {
+              fillColor: style.color,
+              fillOpacity: style.opacity ? style.opacity : 0.8
             }
-
-           layer.set('styles', styles);
+          });
         }
 
-        // Create the where clause
-        function generateWhere(columnName, low, high) {
-            var whereClause = [];
-            whereClause.push("'");
-            whereClause.push(columnName);
-            whereClause.push("' >= ");
-            whereClause.push(low);
-            whereClause.push(" AND '");
-            whereClause.push(columnName);
-            whereClause.push("' < ");
-            whereClause.push(high);
-            return whereClause.join('');
-        }
+        layer.set('styles', styles);
+				 console.log(styles);
+      }
+
+      // Create the where clause
+      function generateWhere(columnName, low, high) {
+        var whereClause = [];
+        whereClause.push("'");
+        whereClause.push(columnName);
+        whereClause.push("' >= ");
+        whereClause.push(low);
+        whereClause.push(" AND '");
+        whereClause.push(columnName);
+        whereClause.push("' < ");
+        whereClause.push(high);
+        return whereClause.join('');
+      }
 
         // Initialize the legend
         function addLegend(map) {
             var legendWrapper = document.createElement('div');
             legendWrapper.id = 'legendWrapper';
             legendWrapper.index = 1;
-            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+            map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
                 legendWrapper);
             legendContent(legendWrapper, column);
         }
@@ -797,7 +859,7 @@ var myTableDiv = document.getElementById("moreinfo7");
             var searchString = document.getElementById('search-string_0').value.replace(/'/g, "\\'");
             if (searchString != '--Select--') {
                 whereClause = "'Corresponding Counties' CONTAINS IGNORING CASE '" + searchString + "'";
-                zoomToAddress(document.getElementById('search-string_0').value + "county texas");
+                zoomToAddress(document.getElementById('search-string_0').value + "county texas",9);
             }
             layer.setOptions({
                 query: {
@@ -811,13 +873,14 @@ var myTableDiv = document.getElementById("moreinfo7");
         }
 
         function zoomto() {
-            zoomToAddress(document.getElementById('adrsearch').value);
+            zoomToAddress(document.getElementById('adrsearch').value,11);
         }
 
         function resetmap() {
 
             map.setCenter(new google.maps.LatLng(31.1, -98.5));
             map.setZoom(6);
+					//window.location.reload();
 
 
         }
@@ -912,9 +975,14 @@ var myTableDiv = document.getElementById("moreinfo7");
 						 "Substantiated Abuse Rating < 18yrs", 
 						 "Substantiated Abuse Rating < 5yrs",
 						 "Substance Abuse Rating",
-						 "Child Abuse and Neglect Related Fatalities Rating"];
+						 "Child Abuse and Neglect Related Fatalities Rating",
+										 "Overall Risk Ranking"];
 			
-			if(data==labels[0]){
+			if(data==labels[7]){
+				//$("#subtitle").text(labels[0]);
+				$("#moreinfo0").show();
+			}
+			else if(data==labels[0]){
 				//$("#subtitle").text(labels[0]);
 				$("#moreinfo1").show();
 			}
@@ -998,7 +1066,7 @@ var myTableDiv = document.getElementById("moreinfo7");
                     </div>
 									<div class="inputdiv">
 										<div class="widgetText" style="font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 18px; font-family: helvetica; color: rgb(78, 75, 75); text-align: left; line-height: 21px; width: 100%; height: 100%; white-space: pre-wrap; padding-top: 0px;">  </div>
-                       		<a href="https://goo.gl/forms/hKtTN8oKDe" class="inputtext" id="buttn">Survey</a>
+                       		<a href="https://goo.gl/forms/hKtTN8oKDe" class="inputtext" id="buttn">Feedback</a>
 			<a onclick="viewdata()" class="inputtext" id="buttn">View Data</a>
                     </div>
                     <datalist id="counties"> <option value="Anderson"> <option value="Andrews"> <option value="Angelina"> <option value="Aransas"> <option value="Archer"> <option value="Armstrong"> <option value="Atascosa"> <option value="Austin"> <option value="Bailey"> <option value="Bandera"> <option value="Bastrop"> <option value="Baylor"> <option value="Bee"> <option value="Bell"> <option value="Bexar"> <option value="Blanco"> <option value="Borden"> <option value="Bosque"> <option value="Bowie"> <option value="Brazoria"> <option value="Brazos"> <option value="Brewster"> <option value="Briscoe"> <option value="Brooks"> <option value="Brown"> <option value="Burleson"> <option value="Burnet"> <option value="Caldwell"> <option value="Calhoun"> <option value="Callahan"> <option value="Cameron"> <option value="Camp"> <option value="Carson"> <option value="Cass"> <option value="Castro"> <option value="Chambers"> <option value="Cherokee"> <option value="Childress"> <option value="Clay"> <option value="Cochran"> <option value="Coke"> <option value="Coleman"> <option value="Collin"> <option value="Collingsworth"> <option value="Colorado"> <option value="Comal"> <option value="Comanche"> <option value="Concho"> <option value="Cooke"> <option value="Coryell"> <option value="Cottle"> <option value="Crane"> <option value="Crockett"> <option value="Crosby"> <option value="Culberson"> <option value="Dallam"> <option value="Dallas"> <option value="Dawson"> <option value="DeWitt"> <option value="Deaf Smith"> <option value="Delta"> <option value="Denton"> <option value="Dickens"> <option value="Dimmit"> <option value="Donley"> <option value="Duval"> <option value="Eastland"> <option value="Ector"> <option value="Edwards"> <option value="Ellis"> <option value="El Paso"> <option value="Erath"> <option value="Falls"> <option value="Fannin"> <option value="Fayette"> <option value="Fisher"> <option value="Floyd"> <option value="Foard"> <option value="Fort Bend"> <option value="Franklin"> <option value="Freestone"> <option value="Frio"> <option value="Gaines"> <option value="Galveston"> <option value="Garza"> <option value="Gillespie"> <option value="Glasscock"> <option value="Goliad"> <option value="Gonzales"> <option value="Gray"> <option value="Grayson"> <option value="Gregg"> <option value="Grimes"> <option value="Guadalupe"> <option value="Hale"> <option value="Hall"> <option value="Hamilton"> <option value="Hansford"> <option value="Hardeman"> <option value="Hardin"> <option value="Harris"> <option value="Harrison"> <option value="Hartley"> <option value="Haskell"> <option value="Hays"> <option value="Hemphill"> <option value="Henderson"> <option value="Hidalgo"> <option value="Hill"> <option value="Hockley"> <option value="Hood"> <option value="Hopkins"> <option value="Houston"> <option value="Howard"> <option value="Hudspeth"> <option value="Hunt"> <option value="Hutchinson"> <option value="Irion"> <option value="Jack"> <option value="Jackson"> <option value="Jasper"> <option value="Jeff Davis"> <option value="Jefferson"> <option value="Jim Hogg"> <option value="Jim Wells"> <option value="Johnson"> <option value="Jones"> <option value="Karnes"> <option value="Kaufman"> <option value="Kendall"> <option value="Kenedy"> <option value="Kent"> <option value="Kerr"> <option value="Kimble"> <option value="King"> <option value="Kinney"> <option value="Kleberg"> <option value="Knox"> <option value="La Salle"> <option value="Lamar"> <option value="Lamb"> <option value="Lampasas"> <option value="Lavaca"> <option value="Lee"> <option value="Leon"> <option value="Liberty"> <option value="Limestone"> <option value="Lipscomb"> <option value="Live Oak"> <option value="Llano"> <option value="Loving"> <option value="Lubbock"> <option value="Lynn"> <option value="McCulloch"> <option value="McLennan"> <option value="McMullen"> <option value="Madison"> <option value="Marion"> <option value="Martin"> <option value="Mason"> <option value="Matagorda"> <option value="Maverick"> <option value="Medina"> <option value="Menard"> <option value="Midland"> <option value="Milam"> <option value="Mills"> <option value="Mitchell"> <option value="Montague"> <option value="Montgomery"> <option value="Moore"> <option value="Morris"> <option value="Motley"> <option value="Nacogdoches"> <option value="Navarro"> <option value="Newton"> <option value="Nolan"> <option value="Nueces"> <option value="Ochiltree"> <option value="Oldham"> <option value="Orange"> <option value="Palo Pinto"> <option value="Panola"> <option value="Parker"> <option value="Parmer"> <option value="Pecos"> <option value="Polk"> <option value="Potter"> <option value="Presidio"> <option value="Rains"> <option value="Randall"> <option value="Reagan"> <option value="Real"> <option value="Red River"> <option value="Reeves"> <option value="Refugio"> <option value="Roberts"> <option value="Robertson"> <option value="Rockwall"> <option value="Runnels"> <option value="Rusk"> <option value="Sabine"> <option value="San Augustine"> <option value="San Jacinto"> <option value="San Patricio"> <option value="San Saba"> <option value="Schleicher"> <option value="Scurry"> <option value="Shackelford"> <option value="Shelby"> <option value="Sherman"> <option value="Smith"> <option value="Somervell"> <option value="Starr"> <option value="Stephens"> <option value="Sterling"> <option value="Stonewall"> <option value="Sutton"> <option value="Swisher"> <option value="Tarrant"> <option value="Taylor"> <option value="Terrell"> <option value="Terry"> <option value="Throckmorton"> <option value="Titus"> <option value="Tom Green"> <option value="Travis"> <option value="Trinity"> <option value="Tyler"> <option value="Upshur"> <option value="Upton"> <option value="Uvalde"> <option value="Val Verde"> <option value="Van Zandt"> <option value="Victoria"> <option value="Walker"> <option value="Waller"> <option value="Ward"> <option value="Washington"> <option value="Webb"> <option value="Wharton"> <option value="Wheeler"> <option value="Wichita"> <option value="Wilbarger"> <option value="Willacy"> <option value="Williamson"> <option value="Wilson"> <option value="Winkler"> <option value="Wise"> <option value="Wood"> <option value="Yoakum"> <option value="Young"> <option value="Zapata"> <option value="Zavala"> </datalist>
@@ -1016,12 +1084,14 @@ var myTableDiv = document.getElementById("moreinfo7");
             </div>
 				<div id="infoWindowDiv" class="dashitem">
 					
-					<p id="chartzip" style="font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 22px; font-family: helvetica; color: rgb(78, 75, 75); text-align: center; line-height: 21px; width: 100%; height: 100%; white-space: pre-wrap; padding-top: 0px;">Zipcode : </p>
+					<p id="chartzip" style="font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 22px; font-family: helvetica; color: rgb(0,0,0); text-align: center; line-height: 21px; width: 100%; height: 100%; white-space: pre-wrap; padding-top: 0px;">Zipcode : </p>
 					<div id="charttitle" class="chartitle" ></div>
-					<canvas id="myChart" width="400" height="400"></canvas>
+									
+					<div id="moreinfo0" class="hide">					
+						
+					</div>
 					
-					<div id="moreinfo1" class="hide">
-					
+					<div id="moreinfo1" class="hide">					
 						
 					</div>
 					
@@ -1044,9 +1114,73 @@ var myTableDiv = document.getElementById("moreinfo7");
 					<div id="moreinfo7" class="hide">
 						
 					</div>
+					<div class="radarChart"></div>
+
+
+		<script>
+			////////////////////////////////////////////////////////////// 
+			//////////////////////// Set-Up ////////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var margin = {top: 60, right: 60, bottom: 100, left: 60},
+				width = 250,
+				height = 250;
+					
+			////////////////////////////////////////////////////////////// 
+			////////////////////////// Data ////////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+				var chartvar = ["Poverty Ranking for Children < 18yrs",
+						 "Poverty Ranking for Children < 5yrs",
+						 "Teen Births Rating (15-19yrs)",
+						 "Substantiated Abuse Rating < 18yrs", 
+						 "Substantiated Abuse Rating < 5yrs",
+						 "Substance Abuse Rating",
+						 "Child Abuse and Neglect Related Fatalities Rating"];
+		/*	var data = [];
+			for(var i in chartvar)
+				{
+					data.push(	{axis:i,value:100})
+				}*/
+			var info =  [368, 440, 425.5, 455, 651.5, 454, 639] ;
+			var data = [
+					  [//iPhone
+						{axis:chartvar[0],value:info[0]},
+						{axis:chartvar[1],value:info[1]},
+						{axis:chartvar[2],value:info[2]},
+						{axis:chartvar[3],value:info[3]},
+						{axis:chartvar[4],value:info[4]},
+						{axis:chartvar[5],value:info[5]},
+						{axis:chartvar[6],value:info[6]}
+					//	{axis:"To Be A Smartphone",value:0.50}			
+					  ]
+					];
+			////////////////////////////////////////////////////////////// 
+			//////////////////// Draw the Chart ////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var color = d3.scale.ordinal()
+				.range(["#EDC951","#CC333F","#00A0B0"]);
+				
+			var radarChartOptions = {
+			  w: width,
+			  h: height,
+			  margin: margin,
+			  maxValue: 1900,
+			  levels: 4,
+			  roundStrokes: true,
+			  color: color
+			};
+			//Call function to draw the Radar chart
+			RadarChart(".radarChart", data, radarChartOptions);
+		</script>
+					
+
 					
 					<script>
-						Chart.defaults.global.responsive = true;
+					/*	Chart.defaults.global.responsive = true;
+					
+						<canvas id="myChart" width="400" height="600"></canvas>
 						
 							var chartvar = ["Poverty Ranking for Children < 18yrs",
 						 "Poverty Ranking for Children < 5yrs",
@@ -1076,7 +1210,7 @@ var myTableDiv = document.getElementById("moreinfo7");
 						
 						
 		var ctx = document.getElementById("myChart").getContext("2d");
-var myRadarChart = new Chart(ctx).Radar(data,{pointLabelFontColor : "#000000",pointLabelFontSize: 0});
+var myRadarChart = new Chart(ctx).Radar(data,{pointLabelFontColor : "#000000",pointLabelFontSize: 10});
 						
 							var canvas = document.getElementById("myChart");
 			canvas.onclick = function(evt){
@@ -1086,7 +1220,7 @@ var myRadarChart = new Chart(ctx).Radar(data,{pointLabelFontColor : "#000000",po
 				displaytable(activePoints[0].label);
     // => activePoints is an array of points on the canvas that are at the same position as the click event.
 };
-						
+						*/
 					</script>
 		
 					
