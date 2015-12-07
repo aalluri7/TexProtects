@@ -38,7 +38,11 @@
                 changeMap_0();
                 return false; //<---- Add this line
             }
+					
         });
+			$( "#search-string_0" ).change(function() {
+ changeMap_0();
+});
         $('#adrsearch').keypress(function (e) {
             if (e.which == 13) {
                 zoomto();
