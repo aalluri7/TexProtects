@@ -130,7 +130,7 @@ tr:nth-child(odd) {background: #FFF}
 lines.splice(0,1);
 // join the array back into a single string
 			
-var newtext = '"ZCTA","Corresponding Counties","Total Estimated Population; 2010-2014","Aggregated 5yr Child Population Estimate < 18yrs; 2010 - 2014 ","Aggregated 5yr Child Population Estimate < 5; 2010 - 2014","Not Hispanic or Latino","Non-Hispanic White Alone","Non-Hispanic Black or African American Alone","Hispanic or Latino","Total Estimated Households; 2010-2014","Estimated Family Households with Female Householder No Husband Present Children < 18","Total Estimated Child Population < 18yrs","Total Children in Poverty < 18yrs","Average Child Poverty < 18yrs","Total Estimated Children < 5yrs","Total Children in Poverty < 5yrs","Average Child Poverty < 5yrs","Number of Teen Births (15-19yrs)","Total Female Population (15-19yrs)","Weighted Teen Birth(15-19yrs)","Number of state funded substance abuse service types utilized by individuals","Average Substance Abuse Treatment ","Child Abuse and Neglect Related Fatalities (2010-2014)","Average Child Abuse and Neglect Related Fatalities < 18yrs","Total Substantiated < 18yrs","Average Substantiated Cases < 18yrs","Total Substantiated < 5yrs","Weighted Substantiated Cases (denominator is 5 not 6) (999 as no data)","Poverty Ranking for Children < 18yrs","Poverty Ranking for Children < 5yrs","Teen Births Rating (15-19yrs)","Substance Abuse Rating","Child Abuse and Neglect Related Fatalities Rating","Substantiated Abuse Rating < 18yrs","Substantiated Abuse Rating < 5yrs","Mean of Overall Risk Rankings ","Overall Risk Ranking"\n' +
+var newtext = '"ZCTA","Corresponding Counties","Total Estimated Population; 2010-2014","Aggregated 5yr Child Population Estimate > 18yrs; 2010 - 2014","Aggregated 5yr Child Population Estimate < 5yrs; 2010 - 2014","Not Hispanic or Latino","Non-Hispanic, White Alone","Non-Hispanic, Black or African American Alone","Hispanic or Latino","Total Estimated Households; 2010-2014","Estimated Family Households with Female Householder, No  Husband Present, Children < 18yrs; 2008-2012 American Community Survey","Total Estimated Child Population < 18yrs","Total Children in Poverty < 18yrs; 2008-2012 American Community Survey","Average Child Poverty < 18yrs; 2008-2012 American Community Survey","Total Estimated Children < 5yrs; 2008-2012 American Community Survey","Total Children in Poverty < 5yrs; 2008-2012 American Community Survey","Average Child Poverty < 5yrs; 2008-2012 American Community Survey","Number of Teen Births (15-19yrs); 2008-2012 American Community Survey","Total Female Population (15-19yrs); 2008-2012 American Community Survey","Average Teen Birth(15-19yrs); 2008-2012 American Community Survey","Number of state funded substance abuse service types utilized by individuals","Average Substance Abuse Treatment; 2008-2012 American Community Survey"," Child Abuse and Neglect Related Fatalities (2010-2014)","Average Child Abuse and Neglect Related Fatalities < 18yrs","Total Substantiated < 18yrs","Average Substantiated Cases < 18yrs","Total Substantiated < 5yrs","Average Substantiated Cases <5 yrs ","Poverty Ranking for Children < 18yrs; 2008-2012 American Community Survey","Poverty Ranking for Children < 5yrs; 2008-2012 American Community Survey","Teen Births Rating (15-19yrs); 2008-2012 American Community Survey","Substance Abuse Rating","Child Abuse and Neglect Related Fatalities","Substantiated Abuse Rating < 18yrs","Substantiated Abuse Rating < 5yrs","Mean of Overall Risk Rankings","Overall Risk Ranking"\n' +
 lines.join('\n');
 			
             csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(newtext);
@@ -168,7 +168,36 @@ lines.join('\n');
     alldata = {};
 		showall = true;
     colnumsold = ['ZCTA','Corresponding Counties','Total Estimated Population','2010 - 2014 Aggregated Child Population Estimate (under 18)','2014 Child Population Estimate (5 and Under)-Please calculate a mean estimate for 2014','2010 - 2014 Aggregated Child Population Estimate (5 and Under)-Estimate the pop mean average for 2010-2014','Not Hispanic or Latino','Non-Hispanic, White Alone','Non-Hispanic, Black or African American Alone','Total Estimated Households','Estimated Family Households with Female Householder,No  Husband Present, Children < 18','Total Estimated Child Population Under 18','Total Children in Poverty Under 18','Rate of Child Poverty Under 18','Total Estimated Children 5 and Under','Children 5 and under in poverty','Rate of Child Poverty 5 and Under','Number of Teen Births (15-19yrs)','Total Female Population (15-19yrs)','Rate of Teen Birth(15-19yrs)','Number of state funded substance abuse service types utilized within a zip code','Family Violence Offenses (2014)','Rate of Substane Abuse Treatments','Child Abuse and Neglect Related Fatalities (2010-2014)','5yr. Aggregated Child Population Estimate (2010 - 2014)','Rate of Child Abuse and Neglect Related Fatalities (Under 18)','Total Substantiated Child Abuse Cases (Under age 18)','5yr. Aggregated Child Population Estimate (under 18) 2010 - 2014','Rate of Substantiated Child Abuse Cases (Under age 18)','Total Substantiated Child Abuse Cases (5 and Under)','Rate of Substantiated Child Abuse Cases (5 and Under)','Poverty Ranking for Children  < 18','Poverty Ranking for Children < 5','Teen Birth Ranking (15-19yrs)','Substance Abuse Ranking','Child Abuse and Neglect Related Fatalities Ranking','Substantiated Child Abuse Ranking < 18','Substantiated Child Abuse Ranking < 6','Mean of Rankings (all)','Final Risk Ranking']
-    colnums = ['ZCTA','Corresponding Counties','Total Estimated Population; 2010-2014','Aggregated 5yr Child Population Estimate < 18yrs; 2010 - 2014 ','Aggregated 5yr Child Population Estimate < 5; 2010 - 2014','Not Hispanic or Latino','Non-Hispanic, White Alone','Non-Hispanic, Black or African American Alone','Hispanic or Latino','Total Estimated Households; 2010-2014','Estimated Family Households with Female Householder, No Husband Present, Children < 18','Total Estimated Child Population < 18yrs','Total Children in Poverty < 18yrs','Average Child Poverty < 18yrs','Total Estimated Children < 5yrs','Total Children in Poverty < 5yrs','Average Child Poverty < 5yrs','Number of Teen Births (15-19yrs)','Total Female Population (15-19yrs)','Weighted Teen Birth(15-19yrs)','Number of state funded substance abuse service types utilized by individuals','Average Substance Abuse Treatment ','Child Abuse and Neglect Related Fatalities (2010-2014)','Average Child Abuse and Neglect Related Fatalities < 18yrs','Total Substantiated < 18yrs','Average Substantiated Cases < 18yrs','Total Substantiated < 5yrs','Weighted Substantiated Cases (denominator is 5 not 6) (999 as no data)','Poverty Ranking for Children < 18yrs','Poverty Ranking for Children < 5yrs','Teen Births Rating (15-19yrs)','Substance Abuse Rating','Child Abuse and Neglect Related Fatalities Rating','Substantiated Abuse Rating < 18yrs','Substantiated Abuse Rating < 5yrs','Mean of Overall Risk Rankings ','Overall Risk Ranking'];
+    //colnums = ['ZCTA','Corresponding Counties','Total Estimated Population; 2010-2014','Aggregated 5yr Child Population Estimate < 18yrs; 2010 - 2014 ','Aggregated 5yr Child Population Estimate < 5; 2010 - 2014','Not Hispanic or Latino','Non-Hispanic, White Alone','Non-Hispanic, Black or African American Alone','Hispanic or Latino','Total Estimated Households; 2010-2014','Estimated Family Households with Female Householder, No Husband Present, Children < 18','Total Estimated Child Population < 18yrs','Total Children in Poverty < 18yrs','Average Child Poverty < 18yrs','Total Estimated Children < 5yrs','Total Children in Poverty < 5yrs','Average Child Poverty < 5yrs','Number of Teen Births (15-19yrs)','Total Female Population (15-19yrs)','Weighted Teen Birth(15-19yrs)','Number of state funded substance abuse service types utilized by individuals','Average Substance Abuse Treatment ','Child Abuse and Neglect Related Fatalities (2010-2014)','Average Child Abuse and Neglect Related Fatalities < 18yrs','Total Substantiated < 18yrs','Average Substantiated Cases < 18yrs','Total Substantiated < 5yrs','Weighted Substantiated Cases (denominator is 5 not 6) (999 as no data)','Poverty Ranking for Children < 18yrs','Poverty Ranking for Children < 5yrs','Teen Births Rating (15-19yrs)','Substance Abuse Rating','Child Abuse and Neglect Related Fatalities Rating','Substantiated Abuse Rating < 18yrs','Substantiated Abuse Rating < 5yrs','Mean of Overall Risk Rankings ','Overall Risk Ranking'];
+		var colnumsori = ['ZCTA', 'Corresponding Counties', 'Total Estimated Population; 2010-2014', 
+											'Aggregated 5yr Child Population Estimate > 18yrs; 2010 - 2014', 
+											'Aggregated 5yr Child Population Estimate < 5yrs; 2010 - 2014', 
+											'Not Hispanic or Latino', ' Non-Hispanic, White Alone', 
+											'Non-Hispanic, Black or African American Alone', 'Hispanic or Latino', 
+											'Total Estimated Households; 2010-2014', 
+											'Estimated Family Households with Female Householder, No  Husband Present, Children < 18yrs; 2008-2012 American Community Survey', 
+											'Total Estimated Child Population < 18yrs', 
+											'Total Children in Poverty < 18yrs; 2008-2012 American Community Survey',
+											'Average Child Poverty < 18yrs; 2008-2012 American Community Survey', 
+											'Total Estimated Children < 5yrs; 2008-2012 American Community Survey',
+											'Total Children in Poverty < 5yrs; 2008-2012 American Community Survey',
+											'Average Child Poverty < 5yrs; 2008-2012 American Community Survey',
+											'Number of Teen Births (15-19yrs); 2008-2012 American Community Survey',
+											'Total Female Population (15-19yrs); 2008-2012 American Community Survey',
+											'Average Teen Birth(15-19yrs); 2008-2012 American Community Survey',
+											'Number of state funded substance abuse service types utilized by individuals', 
+											'Average Substance Abuse Treatment; 2008-2012 American Community Survey', 'Child Abuse and Neglect Related Fatalities (2010-2014)',
+											'Average Child Abuse and Neglect Related Fatalities < 18yrs', 'Total Substantiated < 18yrs', 'Average Substantiated Cases < 18yrs', 
+											'Total Substantiated < 5yrs', 'Average Substantiated Cases <5 yrs', 'Poverty Ranking for Children < 18yrs; 2008-2012 American Community Survey', 
+											'Poverty Ranking for Children < 5yrs; 2008-2012 American Community Survey', 'Teen Births Rating (15-19yrs); 2008-2012 American Community Survey', 'Substance Abuse Rating', 'Child Abuse and Neglect Related Fatalities', 'Substantiated Abuse Rating < 18yrs', 'Substantiated Abuse Rating < 5yrs', 'Mean of Overall Risk Rankings', 'Overall Risk Ranking'] ;
+		 
+		for (var i = 0; i < colnumsori.length; i++) {
+     colnumsori[i] = colnumsori[i].trim();
+ }
+		colnums = colnumsori;
+		
+		
+		console.log(colnums.length);
 		function addcounty(){
 		
 		if(listofcounties.indexOf(document.getElementById('team').value.toLowerCase())>-1)
@@ -182,9 +211,13 @@ lines.join('\n');
 				
 			}
     function ContainsAny(str, items){
+			for (var i = 0; i < items.length; i++) {
+     items[i] = items[i].trim();
+ }
+			var trimed = str.trim();
     for(var i in items){
         var item = items[i];
-        if (str.indexOf(item) > -1){
+        if (trimed.indexOf(item) > -1){
             return true;
         }
 
@@ -231,7 +264,7 @@ lines.join('\n');
 			ftdata.push('<table><thead><tr>');
 					var displayindexes = [];
           for (var i = 0; i < numCols; i++) {
-            var columnTitle = alldata[0][i];
+            var columnTitle = alldata[0][i].trim();
 						
 						
 						if(colnums.indexOf(columnTitle)!=-1)
@@ -261,7 +294,8 @@ lines.join('\n');
 		
           for (var i = 1; i < numRows; i++) {
            // console.log(alldata[i][1])
-            var str = String(alldata[i][1]).toLowerCase();
+            var str = String(alldata[i][1]).toLowerCase().trim();
+						
 						if(ContainsAny(str,countiessss) || showall){
 							ftdata.push('<tr>');
 			  	//	console.log(alldata[i][1])
@@ -331,6 +365,8 @@ lines.join('\n');
 												<input type="button" onclick="addcounty()" value="+" class="inputtext" class="btn" id="addcounty">
 											<input type="button" onclick="drawTableinitit()" value="Load Data" class="inputtext" class="btn">
                         <a href="google.html" class="inputtext">Return to Map</a>
+											<a href="#" class="export inputtext">Export Table data into Excel</a>											
+											<a href="zipcode.csv" download="All Zipcode Level Data for Child Maltreatment Risk Assessment.csv" class="inputtext">Download All Data</a>
                     </div>
 
                   
@@ -342,8 +378,7 @@ lines.join('\n');
                     <div class="inputdiv output" >
                        
                         
-						<a href="#" class="export inputtext">Export Table data into Excel</a>											
-											<a href="zipcode.csv" download="AllData.csv" class="inputtext">Download All Data</a>
+						
                     </div>
 
                   
