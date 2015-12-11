@@ -28,6 +28,18 @@
 <script src="Chart.js"></script>	
 <script>
     $(document).ready(function () {
+			
+			var nativedatalist = !!('list' in document.createElement('input')) && 
+            !!(document.createElement('datalist') && window.HTMLDataListElement);
+
+        if (!nativedatalist) {
+            $('input[list]').each(function () {
+                var availableTags = $('#' + $(this).attr("list")).find('option').map(function () {
+                    return this.value;
+                }).get();
+                $(this).autocomplete({ source: availableTags });
+            });
+        }
 		
 		$(".hide").hide();
 		$("#moreinfo0").show();
@@ -447,7 +459,7 @@ for (i = 0; i < rankings.length; i++)
             google.maps.event.addListener(layer, "click", function (e) {
 				
 				
-				 document.getElementById("chartzip").innerHTML = 'Zipcode : ' + e.row['ZCTA'].value ;
+				 document.getElementById("chartzip").innerHTML = 'ZIP code : ' + e.row['ZCTA'].value ;
 							var counties = e.row['Corresponding Counties'].value.split(";");
 							var rankings = e.row['Relative County Rank'].value.split(";");
 							var relrankings = [] ;
@@ -1137,7 +1149,7 @@ var myTableDiv = document.getElementById("moreinfo7");
             </div>
 				<div id="infoWindowDiv" class="dashitem">
 					
-					<div id="chartzip" class="infotitle">Zipcode : (Click on the map) </div>
+					<div id="chartzip" class="infotitle">ZIP code : (Click on the map) </div>
 					<div id="Relativeranking"  ></div>
 					
 									
