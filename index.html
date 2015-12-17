@@ -1268,7 +1268,7 @@ var myTableDiv = document.getElementById("moreinfo7");
 				{
 					data.push(	{axis:i,value:100})
 				}*/
-			var info =  [368, 440, 425, 455, 651, 454, 639] ;
+			var info =  [.3, .4, .5, .3, .7, .36, .9] ;
 			var data = [
 					  [//iPhone
 						{axis:chartvar[0],value:info[0]},
@@ -1285,14 +1285,16 @@ var myTableDiv = document.getElementById("moreinfo7");
 			//////////////////// Draw the Chart ////////////////////////// 
 			////////////////////////////////////////////////////////////// 
 
-			var color = d3.scale.ordinal()
+		
+				
+		var color = d3.scale.ordinal()
 				.range(["#9DC98A"]);
 				
 			var radarChartOptions = {
 			  w: width,
 			  h: height,
 			  margin: margin,
-			  maxValue: 1900,
+			  maxValue: 1,
 			  levels: 4,
 			  roundStrokes: true,
 			  color: color
