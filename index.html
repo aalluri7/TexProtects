@@ -26,7 +26,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script src="radarChart.js"></script>	
 
-<script src="Chart.js"></script>	
+
 <script>
     $(document).ready(function () {
 			
@@ -501,15 +501,16 @@ for (i = 0; i < rankings.length; i++)
 					data.push(	{axis:i,value:100})
 				}*/
 			//var info =  [368, 440, 425.5, 455, 651.5, 454, 639] ;
+							
 			var data = [
 					  [//iPhone
-						{axis:chartvar[0],value:Math.floor(e.row[chartvar[0]].value)},
-						{axis:chartvar[1],value:Math.floor(e.row[chartvar[1]].value)},
-						{axis:chartvar[2],value:Math.floor(e.row[chartvar[2]].value)},
-						{axis:chartvar[3],value:Math.floor(e.row[chartvar[3]].value)},
-						{axis:chartvar[4],value:Math.floor(e.row[chartvar[4]].value)},
-						{axis:chartvar[5],value:Math.floor(e.row[chartvar[5]].value*1900)},
-						{axis:chartvar[6],value:Math.floor(e.row[chartvar[6]].value)}
+						{axis:chartvar[0],value:((e.row[chartvar[0]].value)/(ranges[1].max))},
+						{axis:chartvar[1],value:((e.row[chartvar[1]].value)/(ranges[2].max))},
+						{axis:chartvar[2],value:((e.row[chartvar[2]].value)/(ranges[3].max))},
+						{axis:chartvar[3],value:((e.row[chartvar[3]].value)/(ranges[6].max))},
+						{axis:chartvar[4],value:((e.row[chartvar[4]].value)/(ranges[7].max))},
+						{axis:chartvar[5],value:((e.row[chartvar[5]].value)/(ranges[4].max))},
+						{axis:chartvar[6],value:((e.row[chartvar[6]].value)/(ranges[5].max))}
 					//	{axis:"To Be A Smartphone",value:0.50}			
 					  ]
 					];
@@ -525,7 +526,7 @@ for (i = 0; i < rankings.length; i++)
 			  w: width,
 			  h: height,
 			  margin: margin,
-			  maxValue: 1900,
+			  maxValue: 1,
 			  levels: 4,
 			  roundStrokes: true,
 			  color: color
